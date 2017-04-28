@@ -1,0 +1,33 @@
+{
+  "name": "obj-filter",
+  "version": "1.0.0",
+  "description": "JavaScript Object content Filter. Support wildcard, nested, and filter function in template.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node t/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlueT/obj-filter.git"
+  },
+  "keywords": [
+    "object",
+    "filter",
+    "template",
+    "javascript",
+    "nodejs",
+    "wildcard",
+    "nested",
+    "function",
+    "browser"
+  ],
+  "author": "BlueT - Matthew Lien - 練喆明",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BlueT/obj-filter/issues"
+  },
+  "homepage": "https://github.com/BlueT/obj-filter#readme",
+  "devDependencies": {
+    "app-root-path": "^2.0.1"
+  }
+}
