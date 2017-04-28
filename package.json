@@ -1,6 +1,6 @@
 {
   "name": "obj-filter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JavaScript Object content Filter. Support wildcard, nested, and filter function in template.",
   "main": "index.js",
   "scripts": {

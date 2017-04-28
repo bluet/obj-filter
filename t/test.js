@@ -44,7 +44,7 @@ var exam_data  = {
 
 
 var result = JSON.stringify( objectFilter(test_template, test_data), null, 4 );
-var exam = JSON.stringify( objectFilter(test_template, test_data), null, 4 );
+var exam = JSON.stringify( exam_data, null, 4 );
 //~ console.log( result );
 if (result === exam) {
 	console.log('Test OK');
