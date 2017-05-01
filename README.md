@@ -5,9 +5,9 @@ JavaScript Object content Filter. Support wildcard, nested, and filter function 
 	
 	var objectFilter = require('obj-filter');
 	
-	var test_template = {
+	var template = {
 	    "runtime": {
-	        "connectionState": "connected",
+	        "connectionState": undefined,
 	        "powerState": function () {return "HELLOWORLD"},
 	        "bootTime": "my boot time",
 	        "paused": false,
@@ -15,39 +15,29 @@ JavaScript Object content Filter. Support wildcard, nested, and filter function 
 	    }
 	};
 	
-	var test_data = {
+	var data = {
 	    "vm": {
-	        "value": "vm-999",
 	        "type": "VirtualMachine"
 	    },
 	    "runtime": {
-	        "device": [
-	            {
-	                "key": 9999
-	            }
-	        ],
+	        "device": 9999,
 	        "connectionState": "connected",
 	        "powerState": "poweredOn",
 	        "bootTime": "2017-04-20T13:56:19.377Z",
 	        "paused": false,
-	        "snapshotInBackground": false
-	    }
-	};
-	
-	var exam_data  = {
-	    "runtime": {
-	        "connectionState": "connected",
-	        "powerState": "HELLOWORLD",
-	        "bootTime": "2017-04-20T13:56:19.377Z",
-	        "paused": false,
-	        "snapshotInBackground": false
+	        "snapshotInBackground": true
 	    }
 	};
 	
 	
-	var result = JSON.stringify( objectFilter(test_template, test_data), null, 4 );
-	var exam = JSON.stringify( exam_data, null, 4 );
-  
-	if (result === exam) {
-		console.log('Test OK');
-	}
+	var result = objectFilter(test_template, test_data);
+	
+	// result is:
+	// {
+	//    "runtime": {
+	//        "powerState": "HELLOWORLD",
+	//        "bootTime": "2017-04-20T13:56:19.377Z",
+	//        "paused": false,
+	//        "snapshotInBackground": true
+	//    }
+	// };
