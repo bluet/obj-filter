@@ -1,5 +1,7 @@
-# obj-filter
-JavaScript Object content Filter. Support wildcard, nested, and filter function in template.
+# obj-filter - JavaScript Object Filter.
+
+JavaScript Object Filter. Deep filtering key/content recursively.  
+Support wildcard, nested, and filter_function in template.
 
 	"use strict";
 	
@@ -15,22 +17,25 @@ JavaScript Object content Filter. Support wildcard, nested, and filter function 
 	    }
 	};
 	
-	var data = {
-	    "vm": {
-	        "type": "VirtualMachine"
-	    },
-	    "runtime": {
-	        "device": 9999,
-	        "connectionState": "connected",
-	        "powerState": "poweredOn",
-	        "bootTime": "2017-04-20T13:56:19.377Z",
-	        "paused": false,
-	        "snapshotInBackground": true
-	    }
-	};
+	var data = function_or_somewhere();
+	
+	// Assume:
+	// var data = {
+	//    "vm": {
+	//        "type": "VirtualMachine"
+	//    },
+	//    "runtime": {
+	//        "device": 9999,
+	//        "connectionState": "connected",
+	//        "powerState": "poweredOn",
+	//        "bootTime": "2017-04-20T13:56:19.377Z",
+	//        "paused": false,
+	//        "snapshotInBackground": true
+	//    }
+	//};
 	
 	
-	var result = objectFilter(test_template, test_data);
+	var result = objectFilter(template, data);
 	
 	// result is:
 	// {
