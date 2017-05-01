@@ -3,29 +3,24 @@
 var appRoot = require('app-root-path');
 const assert = require('assert');
 
-var objectFilter = require(appRoot + "/index.js");
+var objFilter = require(appRoot + "/index.js");
 
-var test_template = {
+var template = {
     "runtime": {
-        "connectionState": "connected",
-        "powerState": function () {return "HELLOWORLD"},
+        "connectionState": undefined,
+        "powerState": function (args) {return "HELLOWORLD " + args},
         "bootTime": "my boot time",
         "paused": false,
         "snapshotInBackground": 1111111
     }
 };
 
-var test_data = {
+var data = {
     "vm": {
-        "value": "vm-999",
         "type": "VirtualMachine"
     },
     "runtime": {
-        "device": [
-            {
-                "key": 9999
-            }
-        ],
+        "device": 9999,
         "connectionState": "connected",
         "powerState": "poweredOn",
         "bootTime": "2017-04-20T13:56:19.377Z",
@@ -34,10 +29,9 @@ var test_data = {
     }
 };
 
-var exam_data  = {
+var exam  = {
     "runtime": {
-        "connectionState": "connected",
-        "powerState": "HELLOWORLD",
+        "powerState": "HELLOWORLD poweredOn",
         "bootTime": "2017-04-20T13:56:19.377Z",
         "paused": false,
         "snapshotInBackground": false
@@ -45,8 +39,8 @@ var exam_data  = {
 };
 
 
-var result_data = objectFilter(test_template, test_data)
-assert.deepEqual(result_data, exam_data);
+var result = objFilter(template, data)
+assert.deepEqual(result, exam);
 
 console.log('Test OK');
 
