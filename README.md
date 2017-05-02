@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/BlueT/obj-filter.svg?branch=master)](https://travis-ci.org/BlueT/obj-filter)
+
 # obj-filter - JavaScript Object Filter.
 
 JavaScript Object Filter. **Deep** filtering key/content *recursively*.  
@@ -144,4 +146,4 @@ var vmData = objFilter(vm_tpl, yourData)
 PRs welcome!  
 If you use/like this module, please don't hesitate to give me a **Star**. I'll be happy whole day!
 
-_Hope this HOWTO can save your time, a tree, and a kitten._
+_Hope this module can save your time, a tree, and a kitten._
