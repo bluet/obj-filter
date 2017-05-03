@@ -3,7 +3,7 @@
 var appRoot = require('app-root-path');
 const assert = require('assert');
 
-var objFilter = require(appRoot + "/index.js");
+var filter = require(appRoot + "/index.js");
 
 var template = {
     "runtime": {
@@ -11,7 +11,8 @@ var template = {
         "powerState": function (args) {return "HELLOWORLD " + args},
         "bootTime": "my boot time",
         "paused": false,
-        "snapshotInBackground": 1111111
+        "snapshotInBackground": 1111111,
+        "CoffeeTeaOrMe": "Me"
     }
 };
 
@@ -29,7 +30,7 @@ var data = {
     }
 };
 
-var exam  = {
+var exam_filter  = {
     "runtime": {
         "powerState": "HELLOWORLD poweredOn",
         "bootTime": "2017-04-20T13:56:19.377Z",
@@ -38,10 +39,23 @@ var exam  = {
     }
 };
 
+var exam_merge  = {
+    "runtime": {
+        "powerState": "HELLOWORLD poweredOn",
+        "bootTime": "2017-04-20T13:56:19.377Z",
+        "paused": false,
+        "snapshotInBackground": false,
+        "CoffeeTeaOrMe": "Me"
+    }
+};
 
-var result = objFilter(template, data)
-assert.deepEqual(result, exam);
+var result_filter = filter(template, data)
+assert.deepEqual(result_filter, exam_filter);
 
-console.log('Test OK');
+console.log('filter:\t	Test OK');
 
-return 1;
+var result_merge = filter.merge(template, data)
+assert.deepEqual(result_merge, exam_merge);
+
+console.log('merge:\t	Test OK');
+

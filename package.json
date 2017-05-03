@@ -4,7 +4,7 @@
   "description": "JavaScript Object content Filter. Support wildcard, nested, and filter function in template.",
   "main": "index.js",
   "scripts": {
-    "test": "node t/test.js"
+    "test": "node t/*.js"
   },
   "repository": {
     "type": "git",

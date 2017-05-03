@@ -10,7 +10,7 @@ Support **wildcard**, **nested**, and **filter_function** in *template*.
 ~~~~ js
 "use strict";
 
-var objFilter = require('obj-filter');
+var filter = require('obj-filter');
 
 var template = {
     "runtime": {
@@ -22,7 +22,9 @@ var template = {
     }
 };
 
-var result = objFilter( template, fetchData() );
+var clean_data = filter( template, fetchData() );
+
+var updated_data = filter.merge( clean_data, newUpdates() );
 ~~~~
 
 ## Template Object
@@ -44,7 +46,7 @@ So it's your call to customize how you would like to handle, define what you wan
 ### Anything else (string, integer, `true`, `false`, etc)
 The value of the key will be **included**.
 
-## Sample Use Cases
+## Default Function
 
 ### Keep only wanted data
 
@@ -55,7 +57,7 @@ Now you can copy one returned data structure (in JSON) to your favorite text edi
 ~~~~ js
 "use strict";
 
-var objFilter = require('obj-filter');
+var filter = require('obj-filter');
 
 var template = {
     "runtime": {
@@ -85,16 +87,16 @@ var data = function_or_somewhere();
 //};
 
 
-var result = objFilter(template, data);
+var clean_data = filter(template, data);
 
-// result is:
+// clean_data is:
 {
-   "runtime": {
-       "powerState": "HELLOWORLD poweredOn",
-       "bootTime": "2017-04-20T13:56:19.377Z",
-       "paused": false,
-       "snapshotInBackground": true
-   }
+    "runtime": {
+        "powerState": "HELLOWORLD poweredOn",
+        "bootTime": "2017-04-20T13:56:19.377Z",
+        "paused": false,
+        "snapshotInBackground": true
+    }
 };
 ~~~~
 
@@ -115,7 +117,7 @@ var template = {
     password: "original password"               // keep whatever user inputs
 }
 
-save_or_send( objFilter(template, inputData) );
+save_or_send( filter(template, inputData) );
 ~~~~
 
 ### Seperated template file
@@ -123,6 +125,7 @@ save_or_send( objFilter(template, inputData) );
 You can save template into seperated files.
 
 Say _data_template/vmInfo.js_
+
 ~~~~ js
 {
     "runtime": {
@@ -136,10 +139,51 @@ Say _data_template/vmInfo.js_
 ~~~~
 
 Require it as template
+
 ~~~~ js
 var vm_tpl = require('data_template/vmInfo.js');
 
-var vmData = objFilter(vm_tpl, yourData)
+var vmData = filter(vm_tpl, yourData)
+~~~~
+
+## `merge` Function
+
+### Keep template keys when not provided in input data.
+
+~~~~ js
+"use strict";
+
+var filter = require('obj-filter');
+
+var template = {
+    "runtime": {
+        "connectionState": undefined,
+        "powerState": function (args) {return "HELLOWORLD " + args},
+        "CoffeeTeaOrMe": "Me"
+    }
+};;
+
+var newUpdates = fetchChanges();
+
+// Assume:
+// var data = {
+//    "runtime": {
+//        "connectionState": "connected",
+//        "powerState": "poweredOn"
+//    }
+//};
+
+
+var updated_data = filter.merge(template, newUpdates);
+
+// clean_data is:
+{
+    "runtime": {
+        "powerState": "HELLOWORLD poweredOn",
+        "bootTime": "2017-04-20T13:56:19.377Z",
+        "CoffeeTeaOrMe": "Me"
+   }
+};
 ~~~~
 
 ## Contribute
