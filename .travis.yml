@@ -3,3 +3,19 @@ node_js:
   - "node"
   - "4"
   - "6"
+
+dist: trusty
+sudo: required
+
+addons:
+  sonarqube:
+    organization: "bluet-github"
+    token:
+      secure: "y5E0d15ntItxYRV5O6DHtAGm+W7hI4jIpbkr+uKk4ZO/KsEVML9mhVgmUGrrx1V9Zbgzy+FBpL84dPqNKVJGfo5/aoTMNBdoogG7GbcGiS9A0ReZlJmmdgdpZeOqBCHNlMJmx+hcBlVD+hmrNGY0o6DujllDS37jjA0U1WDyJJZIud4Tp5ifHxuyxNsvyXu6CFTXaWgPsM26g8U+cCAU51A2/uFVZcmrZ65R/AQ1PkHfSOq8RRHFaDGXmOMypw6rolB0cE5iExhdaxUbQ/V1vN5oo/wZxPzBO3ok6q7kbznrdJVMvnDA1OeZDoOgZa+tul0BXZxsL8iry2QswHllyOK2E2/uqIv6n/QMvVFQ3VEFcQxsYyO02puqxBd5wXd4I/tZllq/2PXGFCj3XEHFa8qsIZUmiUFdF+be+SOAJFTTatrg6h8QLe0Zm2vkVdPNJmVufN9wDddvThgI9JMYGHq0IFVLueIEZ4y2OhYt36epRcjJUds7SPDvaW35yc6mmznLxSdxUvr3jEzNmFh+oII4WYSl25ekPX9ME86zGAs0UmNDHCdK2kb8KwnW8M81pH1oGKhTVDZ37uvBEhVMVqNOahN/BY/HWCrIKJ0CjvwpU2KiD5wf7/NIKOtTSQhv1FxXGtNoplaOa5vXmcKedRkVFhwCfUgnIdjTDvdUhE0="
+jdk:
+  - oraclejdk8
+script:
+  - sonar-scanner
+cache:
+  directories:
+    - '$HOME/.sonar/cache'
