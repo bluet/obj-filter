@@ -10,7 +10,8 @@ var template = {
 		"bootTime": "my boot time",
 		"paused": false,
 		"snapshotInBackground": 1111111,
-		"CoffeeTeaOrMe": "Me"
+		"CoffeeTeaOrMe": "Me",
+		"objjj": { "kk": "yy" }
 	}
 };
 
@@ -22,7 +23,7 @@ var data = {
 		"device": 9999,
 		"connectionState": "connected",
 		"powerState": "poweredOn",
-		"bootTime": "2017-04-20T13:56:19.377Z",
+		"bootTime": undefined,
 		"paused": false,
 		"snapshotInBackground": false
 	}
@@ -31,7 +32,6 @@ var data = {
 var exam_filter  = {
 	"runtime": {
 		"powerState": "HELLOWORLD poweredOn",
-		"bootTime": "2017-04-20T13:56:19.377Z",
 		"paused": false,
 		"snapshotInBackground": false
 	}
@@ -40,10 +40,11 @@ var exam_filter  = {
 var exam_merge  = {
 	"runtime": {
 		"powerState": "HELLOWORLD poweredOn",
-		"bootTime": "2017-04-20T13:56:19.377Z",
+		"bootTime": "my boot time",
 		"paused": false,
 		"snapshotInBackground": false,
-		"CoffeeTeaOrMe": "Me"
+		"CoffeeTeaOrMe": "Me",
+		"objjj": { "kk": "yy" }
 	}
 };
 
