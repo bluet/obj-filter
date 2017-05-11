@@ -4,7 +4,7 @@
   "description": "JavaScript Object content Filter. Support wildcard, nested, and filter function in template.",
   "main": "index.js",
   "scripts": {
-    "test": "node t/*.js"
+    "test": "istanbul cover tape ./t/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,8 @@
   },
   "homepage": "https://github.com/BlueT/obj-filter#readme",
   "devDependencies": {
-    "app-root-path": "^2.0.1"
+    "app-root-path": "^2.0.1",
+    "istanbul": "^0.4.5",
+    "tape": "^4.6.3"
   }
 }
