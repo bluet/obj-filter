@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/BlueT/obj-filter.svg?branch=master)](https://travis-ci.org/BlueT/obj-filter)
+[![Build Status](https://travis-ci.org/BlueT/obj-filter.svg?branch=master)](https://travis-ci.org/BlueT/obj-filter) [![Quality Gate](https://sonarqube.com/api/badges/gate?key=obj-filter)](https://sonarqube.com/dashboard/index/obj-filter)
 
 # obj-filter - JavaScript Object Filter.
 
