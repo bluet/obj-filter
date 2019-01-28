@@ -12,7 +12,7 @@ function filter (template, obj) {
 				
 				if (typeof tmp !== 'undefined') {
 					result[key] = tmp
-				};
+				}
 			});
 			return result;
 		}
@@ -21,7 +21,7 @@ function filter (template, obj) {
 	} else {
 		return obj;
 	}
-};
+}
 
 function merge (template, obj) {
 	
@@ -37,7 +37,7 @@ function merge (template, obj) {
 					result[key] = ret;
 				} else if (typeof template[key] !== 'undefined') {
 					result[key] = template[key];
-				};
+				}
 			});
 			return result;
 		}
@@ -50,7 +50,7 @@ function merge (template, obj) {
 			return obj;
 		}
 	}
-};
+}
 
 module.exports = filter;
 module.exports.merge = merge;
