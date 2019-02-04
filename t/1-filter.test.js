@@ -7,7 +7,7 @@ var template = {
 	"runtime": {
 		"connectionState": undefined,
 		"powerState": function (args) {return "HELLO WORLD " + args},
-		"bootTime": "my boot time",
+		"bootTime": ["my boot time"],
 		"paused": false,
 		"snapshotInBackground": 1111111,
 		"CoffeeTeaOrMe": "Me",
@@ -37,6 +37,12 @@ var exam_filter  = {
 	}
 };
 
+
+test('filter with undefined template should fail', function (t) {
+	var result_fail = filter(undefined, data);
+	t.false(result_fail);
+	t.end();
+});
 
 test('filter should contain: runtime, powerState, bootTime, paused, snapshotInBackground', function (t) {
 	var result_filter = filter(template, data);

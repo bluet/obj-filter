@@ -7,7 +7,7 @@ var template = {
 	"runtime": {
 		"connectionState": undefined,
 		"powerState": function (args) {return "HELLO WORLD " + args},
-		"bootTime": "my boot time",
+		"bootTime": ["my boot time"],
 		"paused": false,
 		"snapshotInBackground": 1111111,
 		"CoffeeTeaOrMe": "Me",
@@ -33,7 +33,7 @@ var data = {
 var exam_merge  = {
 	"runtime": {
 		"powerState": "HELLO WORLD poweredOn",
-		"bootTime": "my boot time",
+		"bootTime": ["my boot time"],
 		"paused": false,
 		"snapshotInBackground": false,
 		"CoffeeTeaOrMe": "Me",
@@ -41,6 +41,11 @@ var exam_merge  = {
 	}
 };
 
+test('filter.merge with undefined template should fail', function (t) {
+	var result_fail = filter.merge(undefined, data);
+	t.false(result_fail);
+	t.end();
+});
 
 test('filter.merge should contain: runtime, powerState, bootTime, paused, snapshotInBackground, CoffeeTeaOrMe', function (t) {
 	var result_merge = filter.merge(template, data);
