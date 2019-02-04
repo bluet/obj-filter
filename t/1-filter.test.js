@@ -6,12 +6,12 @@ var filter = require(appRoot + "/index.js");
 var template = {
 	"runtime": {
 		"connectionState": undefined,
-		"powerState": function (args) {return "HELLOWORLD " + args},
+		"powerState": function (args) {return "HELLO WORLD " + args},
 		"bootTime": "my boot time",
 		"paused": false,
 		"snapshotInBackground": 1111111,
 		"CoffeeTeaOrMe": "Me",
-		"objjj": { "kk": "yy" }
+		"obj jj": { "kk": "yy" }
 	}
 };
 
@@ -31,20 +31,9 @@ var data = {
 
 var exam_filter  = {
 	"runtime": {
-		"powerState": "HELLOWORLD poweredOn",
+		"powerState": "HELLO WORLD poweredOn",
 		"paused": false,
 		"snapshotInBackground": false
-	}
-};
-
-var exam_merge  = {
-	"runtime": {
-		"powerState": "HELLOWORLD poweredOn",
-		"bootTime": "my boot time",
-		"paused": false,
-		"snapshotInBackground": false,
-		"CoffeeTeaOrMe": "Me",
-		"objjj": { "kk": "yy" }
 	}
 };
 
@@ -55,8 +44,3 @@ test('filter should contain: runtime, powerState, bootTime, paused, snapshotInBa
 	t.end();
 });
 
-test('filter.merge should contain: runtime, powerState, bootTime, paused, snapshotInBackground, CoffeeTeaOrMe', function (t) {
-	var result_merge = filter.merge(template, data);
-	t.deepEqual(result_merge, exam_merge);
-	t.end();
-});
