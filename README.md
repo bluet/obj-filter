@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/BlueT/obj-filter.svg?branch=master)](https://travis-ci.org/BlueT/obj-filter) 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=obj-filter&metric=alert_status)](https://sonarcloud.io/dashboard?id=obj-filter)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ea022630c6474d90a15f2e696442585a)](https://app.codacy.com/app/BlueT/obj-filter?utm_source=github.com&utm_medium=referral&utm_content=BlueT/obj-filter&utm_campaign=Badge_Grade_Settings)
 
 # obj-filter - JavaScript Object Filter / Merger.
 
