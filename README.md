@@ -6,6 +6,14 @@
 JavaScript Object Filter. **Deep** filtering key/content *recursively*.  
 Support **wildcard**, **nested**, and **filter_function** in *template*.
 
+## INSTALL
+
+`npm i obj-filter`
+
+Or find help from:
+- https://www.npmjs.com/package/obj-filter
+- https://github.com/BlueT/obj-filter
+
 ## SYNOPSIS
 
 ~~~~ js
@@ -236,6 +244,7 @@ var clean_full_data = filter.exist(template, data);
 ~~~~
 
 ## Contribute
+
 PRs welcome!  
 If you use/like this module, please don't hesitate to give me a **Star**. I'll be happy whole day!
 
