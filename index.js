@@ -1,6 +1,12 @@
+// @flow
 "use strict";
 
 function filter (template, obj) {
+
+	if (template instanceof Array) {
+		console.warn("obj-filter: Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.")
+		return undefined;
+	}
 	
 	if (typeof template === 'undefined') {
 		return undefined;
@@ -24,6 +30,11 @@ function filter (template, obj) {
 }
 
 function merge (template, obj) {
+
+	if (template instanceof Array) {
+		console.warn("obj-filter: Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.")
+		return undefined;
+	}
 	
 	if (typeof template === 'undefined') {
 		return undefined;
@@ -52,5 +63,51 @@ function merge (template, obj) {
 	}
 }
 
+function exist (template, obj) {
+
+	if (template instanceof Array) {
+		console.warn("obj-filter: Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.")
+		return undefined;
+	}
+	
+	if (typeof template === 'undefined') {
+		return undefined;
+	}
+	
+	if (typeof template === 'function') {
+		return template(obj);
+	}
+	
+	// must after typeof template === 'function', so user can handle it if they wanted
+	if (typeof obj === 'undefined') {
+		return undefined;
+	}
+	
+	if (typeof template === 'object') {
+		var result = {};
+
+		for (const key in template) {
+			if (template[key] === undefined) {
+				// value 'undefined' means skip
+				continue;
+			}
+			
+			var tmp = exist(template[key], obj[key]);
+
+			if (typeof tmp !== 'undefined') {
+				result[key] = tmp
+			} else {
+				return undefined;
+			}
+		}
+
+		return result;
+	}
+	
+	// return whatever obj has
+	return obj;
+}
+
 module.exports = filter;
 module.exports.merge = merge;
+module.exports.exist = exist;
