@@ -4,8 +4,8 @@
 function filter (template, obj) {
 
 	if (template instanceof Array) {
-		console.warn("obj-filter: Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.")
-		return undefined;
+		console.warn("obj-filter: Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.\nTreating as `true`");
+		return obj;
 	}
 	
 	if (typeof template === 'undefined') {
@@ -32,8 +32,8 @@ function filter (template, obj) {
 function merge (template, obj) {
 
 	if (template instanceof Array) {
-		console.warn("obj-filter: Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.")
-		return undefined;
+		console.warn("obj-filter: Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.\nTreating as `true`");
+		return obj;
 	}
 	
 	if (typeof template === 'undefined') {
@@ -66,8 +66,8 @@ function merge (template, obj) {
 function exist (template, obj) {
 
 	if (template instanceof Array) {
-		console.warn("obj-filter: Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.")
-		return undefined;
+		console.warn("obj-filter: Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.\nTreating as `true`");
+		return obj;
 	}
 	
 	if (typeof template === 'undefined') {

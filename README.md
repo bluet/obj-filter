@@ -26,6 +26,8 @@ var template = {
 var clean_data = filter( template, fetchData() );
 
 var updated_data = filter.merge( clean_data, newUpdates() );
+
+var clean_full_data = filter.exist( template, fetchData() );
 ~~~~
 
 ## Template Object
@@ -44,7 +46,7 @@ So it's your call to customize how you would like to handle, define what you wan
 - If return `undefined`, the key will be **filtered** (skipped).
 - If return anything else, the key will be **included**.
 
-### Anything else (string, integer, `true`, `false`, etc)
+### Anything else (String, Integer, Array, `true`, `false`, etc)
 The value of the key will be **included**.
 
 ## Default Function
@@ -162,7 +164,7 @@ var template = {
         "powerState": function (args) {return "HELLOWORLD " + args},
         "CoffeeTeaOrMe": "Me"
     }
-};;
+};
 
 var newUpdates = fetchChanges();
 
@@ -184,6 +186,52 @@ var updated_data = filter.merge(template, newUpdates);
         "bootTime": "2017-04-20T13:56:19.377Z",
         "CoffeeTeaOrMe": "Me"
    }
+};
+~~~~
+
+
+## `exist` Function
+
+### Similar to default `filter`, but All Keys in template must also exists in input data.
+
+~~~~ js
+"use strict";
+
+var filter = require('obj-filter');
+
+var template = {
+	"vm": undefined,
+	"runtime": {
+		"connectionState": undefined,
+		"powerState": function (args) {return "HELLO WORLD " + args},
+		"bootTime": "my boot time",
+		"obj jj": { "kk": "yy" }
+	}
+};
+
+var data = fetch_from_somewhere();
+
+// Assume:
+// var data = {
+// 	"runtime": {
+// 		"device": 9999,
+// 		"connectionState": "connected",
+// 		"powerState": "poweredOn",
+// 		"bootTime": 2,
+// 		"obj jj": { "kk": "zz" }
+// 	}
+// };
+
+
+var clean_full_data = filter.exist(template, data);
+
+// clean_full_data is:
+{
+	"runtime": {
+		"powerState": "HELLO WORLD poweredOn",
+		"bootTime": 2,
+		"obj jj": { "kk": "zz" }
+	}
 };
 ~~~~
 
