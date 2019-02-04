@@ -39,4 +39,4 @@ jspm_packages
 .travis.yml
 sonar-project.properties
 .scannerwork/
-
+.flowconfig
