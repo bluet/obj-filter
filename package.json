@@ -1,6 +1,6 @@
 {
   "name": "obj-filter",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "JavaScript Object Filter. Deep filtering key/content recursively. Support wildcard, nested, and filter_function in template.",
   "main": "index.js",
   "scripts": {
