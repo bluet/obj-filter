@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/BlueT/obj-filter.svg?branch=master)](https://travis-ci.org/BlueT/obj-filter) 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=obj-filter&metric=alert_status)](https://sonarcloud.io/dashboard?id=obj-filter)
 
-# obj-filter - JavaScript Object Filter.
+# obj-filter - JavaScript Object Filter / Merger.
 
 JavaScript Object Filter. **Deep** filtering key/content *recursively*.  
 Support **wildcard**, **nested**, and **filter_function** in *template*.
@@ -16,7 +16,7 @@ var filter = require('obj-filter');
 var template = {
     "runtime": {
         "connectionState": undefined,
-        "powerState": function (args) {return "HELLOWORLD " + args},
+        "powerState": function (args) {return "HELLO WORLD " + args},
         "bootTime": "my boot time",
         "paused": false,
         "snapshotInBackground": 1111111
@@ -31,7 +31,7 @@ var clean_full_data = filter.exist( template, fetchData() );
 ~~~~
 
 ## Template Object
-According to the **Template Object structure**, `obj-filter` supports the following types of value with different behaviour to build the result object.
+According to the **Template Object structure**, `obj-filter` supports the following types of value with different behaviors to build the result object.
 
 ### undefined
 If the *value* of the key is `undefined`, the key will be **filtered** (skipped) and will not included in result object.
@@ -65,7 +65,7 @@ var filter = require('obj-filter');
 var template = {
     "runtime": {
         "connectionState": undefined,       // In Template, when the value is undefined, the key will be ignored.
-        "powerState": function (args) {return "HELLOWORLD " + args},    // pass data into your function, and use it as result value
+        "powerState": function (args) {return "HELLO WORLD " + args},    // pass data into your function, and use it as result value
         "bootTime": "my boot time",         // The string is just for your own note. Will keep whatever input is in result.
         "paused": false,                    // Will keep whatever input is in result.
         "snapshotInBackground": 1111111     // Will keep whatever input is in result.
@@ -95,7 +95,7 @@ var clean_data = filter(template, data);
 // clean_data is:
 {
     "runtime": {
-        "powerState": "HELLOWORLD poweredOn",
+        "powerState": "HELLO WORLD poweredOn",
         "bootTime": "2017-04-20T13:56:19.377Z",
         "paused": false,
         "snapshotInBackground": true
@@ -123,9 +123,9 @@ var template = {
 save_or_send( filter(template, inputData) );
 ~~~~
 
-### Seperated template file
+### Separated template file
 
-You can save template into seperated files.
+You can save template into separated files.
 
 Say _data_template/vmInfo.js_
 
@@ -133,7 +133,7 @@ Say _data_template/vmInfo.js_
 {
     "runtime": {
         "connectionState": undefined,
-        "powerState": function (args) {return "HELLOWORLD " + args},
+        "powerState": function (args) {return "HELLO WORLD " + args},
         "bootTime": "my boot time",
         "paused": false,
         "snapshotInBackground": 1111111
@@ -161,7 +161,7 @@ var filter = require('obj-filter');
 var template = {
     "runtime": {
         "connectionState": undefined,
-        "powerState": function (args) {return "HELLOWORLD " + args},
+        "powerState": function (args) {return "HELLO WORLD " + args},
         "CoffeeTeaOrMe": "Me"
     }
 };
@@ -182,7 +182,7 @@ var updated_data = filter.merge(template, newUpdates);
 // clean_data is:
 {
     "runtime": {
-        "powerState": "HELLOWORLD poweredOn",
+        "powerState": "HELLO WORLD poweredOn",
         "bootTime": "2017-04-20T13:56:19.377Z",
         "CoffeeTeaOrMe": "Me"
    }
