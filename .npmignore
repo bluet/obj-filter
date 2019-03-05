@@ -40,3 +40,6 @@ jspm_packages
 sonar-project.properties
 .scannerwork/
 .flowconfig
+.eslintrc.js
+*.tgz
+
