@@ -4,7 +4,7 @@
 # obj-filter - JavaScript Object Filter / Merger.
 
 JavaScript Object Filter. **Deep** filtering key/content *recursively*.  
-Support **wildcard**, **nested**, and **filter_function** in *template*.
+Support **type checking**, **wildcard**, **nested**, and **filter function** in *template*.
 
 ## INSTALL
 
@@ -28,7 +28,8 @@ var template = {
         "bootTime": "my boot time",
         "paused": false,
         "snapshotInBackground": 1111111
-    }
+    },
+    "running": Boolean
 };
 
 var clean_data = filter( template, fetchData() );
@@ -54,8 +55,22 @@ So it's your call to customize how you would like to handle, define what you wan
 - If return `undefined`, the key will be **filtered** (skipped).
 - If return anything else, the key will be **included**.
 
-### Anything else (String, Integer, Array, `true`, `false`, etc)
+### DataTypes / Constructors
+`String`, `Number`, `Boolean`, `Array`, `Symbol`, `Map`, `Set`, `WeakMap`, `WeakSet`, `Object`, `Function` in template will do type checking on target object.
+
+Success if type matches and fails if they don't.
+
+### Anything else (string, array, number, etc)
 The value of the key will be **included**.
+
+### onException callback function
+You can pass an additional `onException` callback function into `filter()`, `filter.merge()`, and `filter.exist()` to handle exceptions.
+
+`onException(template, input, error_msg)` will be called when data expected but type mismatch or undefined.
+
+~~~~ js
+filter(template, data, (tpl, obj, err) => { console.dir({tpl, obj, err}); return undefined; });
+~~~~
 
 ## Default Function
 
@@ -177,7 +192,7 @@ var template = {
 var newUpdates = fetchChanges();
 
 // Assume:
-// var data = {
+// var newUpdates = {
 //    "runtime": {
 //        "connectionState": "connected",
 //        "powerState": "poweredOn"
@@ -187,7 +202,7 @@ var newUpdates = fetchChanges();
 
 var updated_data = filter.merge(template, newUpdates);
 
-// clean_data is:
+// updated_data is:
 {
     "runtime": {
         "powerState": "HELLO WORLD poweredOn",

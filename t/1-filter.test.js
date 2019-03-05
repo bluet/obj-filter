@@ -12,7 +12,8 @@ var template = {
 		"snapshotInBackground": 1111111,
 		"CoffeeTeaOrMe": "Me",
 		"obj jj": { "kk": "yy" }
-	}
+	},
+	"running": Boolean
 };
 
 var data = {
@@ -39,14 +40,21 @@ var exam_filter  = {
 
 
 test("filter with undefined template should fail", function (t) {
-	var result_fail = filter(undefined, data);
-	t.false(result_fail);
+	t.false(filter(undefined, data), "empty template results empty result");
+	t.end();
+});
+
+test("filter with String Type template", function (t) {
+	t.equal("data", filter(String, "data"), "string matches String");
+	t.false(filter(String, String), "not equal to `String` object");
+	t.equal("data", filter(String, String, () => {return "data";} ), "use onException to help");
 	t.end();
 });
 
 test("filter should contain: runtime, powerState, bootTime, paused, snapshotInBackground", function (t) {
 	var result_filter = filter(template, data);
 	t.deepEqual(result_filter, exam_filter);
+	t.deepEqual(exam_filter, filter(template, data, () => {return undefined;} ));
 	t.end();
 });
 

@@ -12,7 +12,8 @@ var template = {
 		"snapshotInBackground": 1111111,
 		"CoffeeTeaOrMe": "Me",
 		"obj jj": { "kk": "yy" }
-	}
+	},
+	"running": Boolean
 };
 
 var data = {
@@ -38,12 +39,19 @@ var exam_merge  = {
 		"snapshotInBackground": false,
 		"CoffeeTeaOrMe": "Me",
 		"obj jj": { "kk": "yy" }
-	}
+	},
+	"running": Boolean
 };
 
 test("filter.merge with undefined template should fail", function (t) {
-	var result_fail = filter.merge(undefined, data);
-	t.false(result_fail);
+	var result_fail = filter.merge(undefined, data, () => {return undefined;} );
+	t.false(result_fail, "empty template results empty result");
+	t.end();
+});
+
+test("filter.merge with String Type template", function (t) {
+	t.equal("data", filter.merge(String, "data"), "string matches String");
+	t.equal(String, filter.merge(String, String), "not equal to `String` object");
 	t.end();
 });
 

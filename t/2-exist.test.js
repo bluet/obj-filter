@@ -10,7 +10,8 @@ var template = {
 		"powerState": function (args) {return "HELLO WORLD " + args;},
 		"bootTime": ["my boot time"],
 		"obj jj": { "kk": "yy" }
-	}
+	},
+	"running": Boolean
 };
 
 var data_success = {
@@ -20,7 +21,8 @@ var data_success = {
 		"powerState": "poweredOn",
 		"bootTime": 2,
 		"obj jj": { "kk": "zz" }
-	}
+	},
+	"running": false
 };
 
 var data_fail = {
@@ -39,13 +41,21 @@ var exam_success  = {
 		"powerState": "HELLO WORLD poweredOn",
 		"bootTime": 2,
 		"obj jj": { "kk": "zz" }
-	}
+	},
+	"running": false
 };
 
 
 test("filter.exist with undefined template should fail", function (t) {
 	var result_fail = filter.exist(undefined, data_success);
 	t.false(result_fail);
+	t.end();
+});
+
+test("filter.exist with String Type template", function (t) {
+	t.equal("data", filter.exist(String, "data"), "string matches String");
+	t.false(filter.exist(String, String), "not equal to `String` object");
+	t.equal("cb", filter.exist(String, 1, () => { return "cb"; }));
 	t.end();
 });
 
@@ -58,5 +68,7 @@ test("filter.exist should contain: runtime, connectionState, powerState, bootTim
 test("filter.exist should fail", function (t) {
 	var result_fail = filter.exist(template, data_fail);
 	t.false(result_fail);
+	t.false(filter.exist(template, undefined));
+	t.false(filter.exist(template, data_fail, () => {return undefined;} ));
 	t.end();
 });
