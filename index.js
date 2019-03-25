@@ -62,6 +62,7 @@ function filter (template, obj, onException) {
 	return obj;
 }
 
+filter.prototype.merge = merge;
 function merge (template, obj, onException) {
 
 	// exclude what's undefined in template
@@ -138,6 +139,7 @@ function merge (template, obj, onException) {
 	return obj;
 }
 
+filter.prototype.exist = exist;
 function exist (template, obj, onException) {
 
 	// exclude what's undefined in template
@@ -238,7 +240,7 @@ function _sameType (template, obj) {
 		|| (template === Number && typeof obj === "number")
 		|| (template === Boolean && typeof obj === "boolean")
 		|| (template === Array && Array.isArray(obj))
-		|| (template === Symbol && typeof obj === "symbol")
+		|| (template === Symbol && obj instanceof Symbol)
 		|| (template === Map && obj instanceof Map)
 		|| (template === Set && obj instanceof Set)
 		|| (template === WeakMap && obj instanceof WeakMap)
@@ -254,5 +256,6 @@ function _sameType (template, obj) {
 
 
 module.exports = filter;
+module.exports.filter = filter;
 module.exports.merge = merge;
 module.exports.exist = exist;
