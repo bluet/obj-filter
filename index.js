@@ -1,6 +1,48 @@
 // @flow
 "use strict";
 
+
+function _isType (template) {
+	if (
+		(template === String)
+		|| (template === Number)
+		|| (template === Boolean)
+		|| (template === Array)
+		|| (template === Symbol)
+		|| (template === Map)
+		|| (template === Set)
+		|| (template === WeakMap)
+		|| (template === WeakSet)
+		|| (template === Object)
+		|| (template === Function)
+	) {
+		return true;
+	}
+
+	return false;
+}
+
+function _sameType (template, obj) {
+	if (
+		(template === String && typeof obj === "string")
+		|| (template === Number && typeof obj === "number")
+		|| (template === Boolean && typeof obj === "boolean")
+		|| (template === Array && Array.isArray(obj))
+		|| (template === Symbol && obj instanceof Symbol)
+		|| (template === Map && obj instanceof Map)
+		|| (template === Set && obj instanceof Set)
+		|| (template === WeakMap && obj instanceof WeakMap)
+		|| (template === WeakSet && obj instanceof WeakSet)
+		|| (template === Function && typeof obj === "function")
+		|| (template === Object && typeof obj === "object")
+	) {
+		return true;
+	}
+
+	return false;
+}
+
+
 function filter (template, obj, onException) {
 
 	// exclude what's undefined in template
@@ -62,7 +104,6 @@ function filter (template, obj, onException) {
 	return obj;
 }
 
-filter.prototype.merge = merge;
 function merge (template, obj, onException) {
 
 	// exclude what's undefined in template
@@ -139,7 +180,6 @@ function merge (template, obj, onException) {
 	return obj;
 }
 
-filter.prototype.exist = exist;
 function exist (template, obj, onException) {
 
 	// exclude what's undefined in template
@@ -214,48 +254,6 @@ function exist (template, obj, onException) {
 }
 
 
-function _isType (template) {
-	if (
-		(template === String)
-		|| (template === Number)
-		|| (template === Boolean)
-		|| (template === Array)
-		|| (template === Symbol)
-		|| (template === Map)
-		|| (template === Set)
-		|| (template === WeakMap)
-		|| (template === WeakSet)
-		|| (template === Object)
-		|| (template === Function)
-	) {
-		return true;
-	}
-
-	return false;
-}
-
-function _sameType (template, obj) {
-	if (
-		(template === String && typeof obj === "string")
-		|| (template === Number && typeof obj === "number")
-		|| (template === Boolean && typeof obj === "boolean")
-		|| (template === Array && Array.isArray(obj))
-		|| (template === Symbol && obj instanceof Symbol)
-		|| (template === Map && obj instanceof Map)
-		|| (template === Set && obj instanceof Set)
-		|| (template === WeakMap && obj instanceof WeakMap)
-		|| (template === WeakSet && obj instanceof WeakSet)
-		|| (template === Function && typeof obj === "function")
-		|| (template === Object && typeof obj === "object")
-	) {
-		return true;
-	}
-
-	return false;
-}
-
-
-filter.prototype.ArrayIter = ArrayIter;
 function ArrayIter (checker, template, {min = 0, onException} = {}) {
 
 	if (typeof(checker) !== "function") {
@@ -278,6 +276,12 @@ function ArrayIter (checker, template, {min = 0, onException} = {}) {
 		return result.length >= min ? result : undefined;
 	};
 }
+
+
+filter.prototype.merge = merge;
+filter.prototype.exist = exist;
+filter.prototype.ArrayIter = ArrayIter;
+
 
 module.exports = filter;
 module.exports.filter = filter;
