@@ -19,24 +19,23 @@ Or find help from:
 ~~~~ js
 "use strict";
 
-var filter = require('obj-filter');
+const {filter, merge, exist, ArrayIter} = require('obj-filter');
 
-var template = {
+const template = {
     "runtime": {
-        "connectionState": undefined,
-        "powerState": function (args) {return "HELLO WORLD " + args},
-        "bootTime": "my boot time",
+        "connectionState": undefined,   // excluded
+        "powerState": function (args) {return "HELLO WORLD " + args},   // pass into the checker function
+        "bootTime": "my boot time",     // included
         "paused": false,
-        "snapshotInBackground": 1111111
+        "snapshotInBackground": 1111111,
+        "numbers": ArrayIter(filter, Number),   // value of "numbers" must be an array, and will check all elements in the array
     },
     "running": Boolean
 };
 
-var clean_data = filter( template, fetchData() );
-
-var updated_data = filter.merge( clean_data, newUpdates() );
-
-var clean_full_data = filter.exist( template, fetchData() );
+let clean_data = filter( template, fetchData() );
+let updated_data = filter.merge( clean_data, newUpdates() );
+let clean_full_data = filter.exist( template, fetchData() );
 ~~~~
 
 ## Template Object
@@ -71,6 +70,36 @@ You can pass an additional `onException` callback function into `filter()`, `fil
 ~~~~ js
 filter(template, data, (tpl, obj, err) => { console.dir({tpl, obj, err}); return undefined; });
 ~~~~
+
+
+## ArrayIter Check Array Elements
+
+If you want to check `values of array`, use `ArrayIter`. It makes sure that value must be an Array and checks all elements in the array.
+
+The first two arguments are required:
+- (required) filter / merge / exist
+- (required) template
+- (optional) option
+    - min: an Integer, default `0`. indicates at least how many elements must be valid. If the result array contains elements fewer than that number, the whole result will be `undefined`.
+    - onException: a Function, will be called when exception occurred.
+
+~~~~ js
+const template = {
+	"a1": ArrayIter(filter, {
+		"a": String,
+		"a11": ArrayIter(
+            exist,
+            Number,
+            {"min": 3, onException: () => console.log("WAAATT")}
+        ),
+		"a12": ArrayIter(merge, {
+			"a121": filter.ArrayIter(filter, Number)
+		}),
+	}),
+	"a2": ArrayIter(filter, Number)
+};
+~~~~
+
 
 ## Default Function
 

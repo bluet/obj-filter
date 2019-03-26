@@ -3,6 +3,10 @@
 
 function filter (template, obj, onException) {
 
+	if (arguments.length === 1) {
+		return filter;
+	}
+
 	// exclude what's undefined in template
 	if (typeof template === "undefined") {
 		return undefined;
@@ -255,7 +259,43 @@ function _sameType (template, obj) {
 }
 
 
+filter.prototype.ArrayIter = ArrayIter;
+function ArrayIter (checker, template, option = {"min": 0}) {
+	if (typeof(checker) !== "function") {
+		if (option.onException) {
+			option.onException(undefined, undefined, "obj-filter: First argument of ArrayIter must be a function of obj-filter");
+		} else {
+			console.error("obj-filter: First argument of ArrayIter must be a function of obj-filter");
+		}
+	}
+	
+	return function (array) {
+		if (!(array instanceof Array)) {
+			return undefined;
+		}
+
+		let result = array.map((value) => {
+			return checker(template, value, option.onException);
+		}).filter((x) => x !== undefined);
+		return result.length >= option.min ? result : undefined;
+
+		// let result = [];
+		// for (let index = 0; index < array.length; index++) {
+		// 	let tmp = checker(template, array[index], option.onException);
+			
+		// 	if (typeof tmp == undefined) {
+		// 		return undefined;
+		// 	}
+
+		// 	result.push(tmp);
+		// }
+		// return result;
+		// return result.length >= option.min ? result : undefined;
+	};
+}
+
 module.exports = filter;
 module.exports.filter = filter;
 module.exports.merge = merge;
 module.exports.exist = exist;
+module.exports.ArrayIter = ArrayIter;
