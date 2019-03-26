@@ -7,11 +7,15 @@ const template = {
 	"a1": ArrayIter(filter, {
 		"a": String,
 		"a11": ArrayIter(exist, Number, {"min": 3}),
-		"a12": ArrayIter(merge, {
-			"a121": filter.ArrayIter(filter, Number)
-		}),
+		"a12": ArrayIter(
+			merge,
+			{
+				"a121": filter.ArrayIter(filter, Number)
+			},
+		),
+		"b": ArrayIter(exist, Number),
 	}),
-	"a2": ArrayIter(filter, Number)
+	"a2": ArrayIter(filter, Number, {"onException": () => undefined})
 };
 
 var data = {
@@ -30,6 +34,7 @@ var data = {
 					"a121": [1, 2, 3]
 				},
 			],
+			"b": "b"
 		},
 		{
 			"a11": [1, 2, 3],
@@ -85,21 +90,23 @@ const exam_data  = {
 };
 
 
-test("filter with undefined template should fail", function (t) {
-	t.false(filter(undefined, data), "empty template results empty result");
+test("filter with ArrayIter and undefined filter should fail", function (t) {
+	let result = filter(
+		{"a2": ArrayIter(undefined, Number, {"onException": () => undefined})},
+		{"a2": [1, 2, 3]},
+	);
+	t.deepEqual(result, {}, "undefined filter with customer onException results empty result");
+
+	t.throws(() => filter(
+		{"a2": ArrayIter(undefined, Number)},
+		{"a2": [1, 2, 3]},
+	), Error, "undefined filter with default onException throws Error");
+
 	t.end();
 });
 
-test("filter with String Type template", function (t) {
-	t.equal("data", filter(String, "data"), "string matches String");
-	t.false(filter(String, String), "not equal to `String` object");
-	t.equal("data", filter(String, String, () => {return "data";} ), "use onException to help");
-	t.end();
-});
-
-test("filter should contain: runtime, powerState, bootTime, paused, snapshotInBackground", function (t) {
-	var result_filter = filter(template, data);
-	// console.log(JSON.stringify(result_filter, null, 4));
+test("filter with ArrayIter", function (t) {
+	let result_filter = filter(template, data);
 	t.deepEqual(result_filter, exam_data);
 	t.deepEqual(exam_data, filter(template, data, () => {return undefined;} ));
 	t.end();

@@ -3,10 +3,6 @@
 
 function filter (template, obj, onException) {
 
-	if (arguments.length === 1) {
-		return filter;
-	}
-
 	// exclude what's undefined in template
 	if (typeof template === "undefined") {
 		return undefined;
@@ -249,8 +245,8 @@ function _sameType (template, obj) {
 		|| (template === Set && obj instanceof Set)
 		|| (template === WeakMap && obj instanceof WeakMap)
 		|| (template === WeakSet && obj instanceof WeakSet)
-		|| (template === Object && typeof obj === "object")
 		|| (template === Function && typeof obj === "function")
+		|| (template === Object && typeof obj === "object")
 	) {
 		return true;
 	}
@@ -260,12 +256,13 @@ function _sameType (template, obj) {
 
 
 filter.prototype.ArrayIter = ArrayIter;
-function ArrayIter (checker, template, option = {"min": 0}) {
+function ArrayIter (checker, template, {min = 0, onException} = {}) {
+
 	if (typeof(checker) !== "function") {
-		if (option.onException) {
-			option.onException(undefined, undefined, "obj-filter: First argument of ArrayIter must be a function of obj-filter");
+		if (onException) {
+			return onException(undefined, undefined, "obj-filter: First argument of ArrayIter must be a function of obj-filter");
 		} else {
-			console.error("obj-filter: First argument of ArrayIter must be a function of obj-filter");
+			throw new Error("obj-filter: First argument of ArrayIter must be a function of obj-filter");
 		}
 	}
 	
@@ -275,22 +272,10 @@ function ArrayIter (checker, template, option = {"min": 0}) {
 		}
 
 		let result = array.map((value) => {
-			return checker(template, value, option.onException);
+			return checker(template, value, onException);
 		}).filter((x) => x !== undefined);
-		return result.length >= option.min ? result : undefined;
 
-		// let result = [];
-		// for (let index = 0; index < array.length; index++) {
-		// 	let tmp = checker(template, array[index], option.onException);
-			
-		// 	if (typeof tmp == undefined) {
-		// 		return undefined;
-		// 	}
-
-		// 	result.push(tmp);
-		// }
-		// return result;
-		// return result.length >= option.min ? result : undefined;
+		return result.length >= min ? result : undefined;
 	};
 }
 

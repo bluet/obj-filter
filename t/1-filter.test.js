@@ -39,8 +39,9 @@ var exam_filter  = {
 };
 
 
-test("filter with undefined template should fail", function (t) {
-	t.false(filter(undefined, data), "empty template results empty result");
+test("filter with empty template should fail", function (t) {
+	t.false(filter(undefined, data), "undefined template results empty result");
+	t.deepEqual(filter({}, data), {}, "undefined template results empty result");
 	t.end();
 });
 

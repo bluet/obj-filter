@@ -58,5 +58,6 @@ test("filter.merge with String Type template", function (t) {
 test("filter.merge should contain: runtime, powerState, bootTime, paused, snapshotInBackground, CoffeeTeaOrMe", function (t) {
 	var result_merge = filter.merge(template, data);
 	t.deepEqual(result_merge, exam_merge);
+	t.deepEqual(exam_merge, filter.merge(template, data, () => {return undefined;} ));
 	t.end();
 });

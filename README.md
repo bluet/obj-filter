@@ -90,10 +90,10 @@ const template = {
 		"a11": ArrayIter(
             exist,
             Number,
-            {"min": 3, onException: () => console.log("WAAATT")}
+            {"onException": () => undefined}
         ),
 		"a12": ArrayIter(merge, {
-			"a121": filter.ArrayIter(filter, Number)
+			"a121": filter.ArrayIter(filter, Number, {"min": 3})
 		}),
 	}),
 	"a2": ArrayIter(filter, Number)
