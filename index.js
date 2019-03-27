@@ -277,12 +277,6 @@ function ArrayIter (checker, template, {min = 0, onException} = {}) {
 	};
 }
 
-
-filter.prototype.merge = merge;
-filter.prototype.exist = exist;
-filter.prototype.ArrayIter = ArrayIter;
-
-
 module.exports = filter;
 module.exports.filter = filter;
 module.exports.merge = merge;
