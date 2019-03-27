@@ -2,13 +2,13 @@
 "use strict";
 
 const EXCEPTION_MSGS = {
-	array: `Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.\nTreating as ${true}`,
-	mergeTypeChecking: `Using Type Checking in template but object target object doesn't match.\nReturning template Type as result.`,
-	existTypeChecking: `Using Type Checking in template but object target object doesn't match.\nReturning undefined.`,
-	arrayIterFirstArg: 'First argument of ArrayIter must be a function of obj-filter',
-}
+	array: `Doesn"t support Array in template yet. The meaning might differ in different context. Please use custom function instead.\nTreating as ${true}`,
+	mergeTypeChecking: `Using Type Checking in template but object target object doesn"t match.\nReturning template Type as result.`,
+	existTypeChecking: `Using Type Checking in template but object target object doesn"t match.\nReturning undefined.`,
+	arrayIterFirstArg: "First argument of ArrayIter must be a function of obj-filter",
+};
 
-const getExceptionMsg = (type, second = false) => `obj-filter: ${second ? second + ': ' : ''}${EXCEPTION_MSGS[type]}`;
+const getExceptionMsg = (type, second = false) => `obj-filter: ${second ? second + ": " : ""}${EXCEPTION_MSGS[type]}`;
 
 function _isType (template) {
 	if (
@@ -53,7 +53,7 @@ function _sameType (template, obj) {
 
 function filter (template, obj, onException) {
 
-	// exclude what's undefined in template
+	// exclude what"s undefined in template
 	if (typeof template === "undefined") {
 		return undefined;
 	}
@@ -77,7 +77,7 @@ function filter (template, obj, onException) {
 			return onException(
 				template,
 				obj,
-				getExceptionMsg('array')
+				getExceptionMsg("array")
 			);
 		}
 		return obj;
@@ -86,15 +86,14 @@ function filter (template, obj, onException) {
 	// filtering
 	if ( typeof template === "object" ){
 		if (typeof obj === "object") {
-			var result = {};
-			Object.keys(template).forEach( function (key) {
-				var tmp = filter(template[key], obj[key], onException);
+			return Object.keys(template).reduce((result, key) => {
+				const tmp = filter(template[key], obj[key], onException);
 				
 				if (typeof tmp !== "undefined") {
 					result[key] = tmp;
 				}
-			});
-			return result;
+				return result;
+			}, {});
 		}
 
 		// type mismatch
@@ -114,7 +113,7 @@ function filter (template, obj, onException) {
 
 function merge (template, obj, onException) {
 
-	// exclude what's undefined in template
+	// exclude what"s undefined in template
 	if (typeof template === "undefined") {
 		return undefined;
 	}
@@ -130,7 +129,7 @@ function merge (template, obj, onException) {
 			return onException(
 				template,
 				obj,
-				getExceptionMsg('mergeTypeChecking', 'merge')
+				getExceptionMsg("mergeTypeChecking", "merge")
 			);
 		}
 		return template;
@@ -142,7 +141,7 @@ function merge (template, obj, onException) {
 			return onException(
 				template,
 				obj,
-				getExceptionMsg('array', 'merge')
+				getExceptionMsg("array", "merge")
 			);
 		}
 		return obj;
@@ -151,24 +150,23 @@ function merge (template, obj, onException) {
 	// obj ? obj : template ;
 	if ( typeof template === "object" ){
 		if (typeof obj === "object") {
-			var result = {};
-			Object.keys(template).forEach( function (key) {
-				var ret = merge(template[key], obj[key], onException);
-				
+			return Object.keys(template).reduce((result, key) => {
+				const ret = merge(template[key], obj[key], onException);
+
 				if (typeof ret !== "undefined") {
 					result[key] = ret;
 				} else if (typeof template[key] !== "undefined") {
 					result[key] = template[key];
 				}
-			});
-			return result;
+				return result;
+			}, {});
 		} else {
 			// type mismatch
 			if (onException) {
 				return onException(
 					template,
 					obj,
-					getExceptionMsg('mergeTypeChecking', 'merge')
+					getExceptionMsg("mergeTypeChecking", "merge")
 				);
 			}
 			return template;
@@ -180,7 +178,7 @@ function merge (template, obj, onException) {
 		return template(obj);
 	}
 
-	// must after typeof template === 'function', so user can handle it if they wanted
+	// must after typeof template === "function", so user can handle it if they wanted
 	if (typeof obj === "undefined") {
 		return template;
 	}
@@ -190,7 +188,7 @@ function merge (template, obj, onException) {
 
 function exist (template, obj, onException) {
 
-	// exclude what's undefined in template
+	// exclude what"s undefined in template
 	if (typeof template === "undefined") {
 		return undefined;
 	}
@@ -206,7 +204,7 @@ function exist (template, obj, onException) {
 			return onException(
 				template,
 				obj,
-				getExceptionMsg('existTypeChecking')
+				getExceptionMsg("existTypeChecking")
 			);
 		}
 		
@@ -219,7 +217,7 @@ function exist (template, obj, onException) {
 			return onException(
 				template,
 				obj,
-				getExceptionMsg('array', 'exist')
+				getExceptionMsg("array", "exist")
 			);
 		}
 		return obj;
@@ -230,31 +228,29 @@ function exist (template, obj, onException) {
 		return template(obj);
 	}
 	
-	// must after typeof template === 'function', so user can handle it if they wanted
+	// must after typeof template === "function", so user can handle it if they wanted
 	if (typeof obj === "undefined") {
 		return undefined;
 	}
 	
 	// check if all keys exists recursively
 	if (typeof template === "object") {
-		var result = {};
-
-		for (const key in template) {
+		return Object.keys(template).reduce((result, key) => {
 			if (template[key] === undefined) {
-				// value 'undefined' means skip
-				continue;
+				// value "undefined" means skip
+				return result;
 			}
 			
-			var tmp = exist(template[key], obj[key], onException);
+			const tmp = exist(template[key], obj[key], onException);
 
-			if (typeof tmp !== "undefined") {
-				result[key] = tmp;
-			} else {
+			if (typeof tmp === "undefined") {
 				return undefined;
-			}
-		}
+			} 
+			
+			result[key] = tmp;
 
-		return result;
+			return result;
+		}, {});
 	}
 	
 	// return whatever obj has
@@ -266,10 +262,10 @@ function ArrayIter (checker, template, {min = 0, onException} = {}) {
 
 	if (typeof(checker) !== "function") {
 		if (onException) {
-			return onException(undefined, undefined, getExceptionMsg('arrayIterFirstArg'));
-		} else {
-			throw new Error(getExceptionMsg('arrayIterFirstArg'));
-		}
+			return onException(undefined, undefined, getExceptionMsg("arrayIterFirstArg"));
+		} 
+
+		throw new Error(getExceptionMsg("arrayIterFirstArg"));
 	}
 	
 	return function (array) {
@@ -277,9 +273,8 @@ function ArrayIter (checker, template, {min = 0, onException} = {}) {
 			return undefined;
 		}
 
-		let result = array.map((value) => {
-			return checker(template, value, onException);
-		}).filter((x) => x !== undefined);
+		const result = array.map((value) => checker(template, value, onException))
+							.filter((x) => x !== undefined);
 
 		return result.length >= min ? result : undefined;
 	};
