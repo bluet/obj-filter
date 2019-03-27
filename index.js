@@ -1,6 +1,14 @@
 // @flow
 "use strict";
 
+const EXCEPTION_MSGS = {
+	array: `Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.\nTreating as ${true}`,
+	mergeTypeChecking: `Using Type Checking in template but object target object doesn't match.\nReturning template Type as result.`,
+	existTypeChecking: `Using Type Checking in template but object target object doesn't match.\nReturning undefined.`,
+	arrayIterFirstArg: 'First argument of ArrayIter must be a function of obj-filter',
+}
+
+const getExceptionMsg = (type, second = false) => `obj-filter: ${second ? second + ': ' : ''}${EXCEPTION_MSGS[type]}`;
 
 function _isType (template) {
 	if (
@@ -69,7 +77,7 @@ function filter (template, obj, onException) {
 			return onException(
 				template,
 				obj,
-				"obj-filter: Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.\nTreating as `true`"
+				getExceptionMsg('array')
 			);
 		}
 		return obj;
@@ -122,7 +130,7 @@ function merge (template, obj, onException) {
 			return onException(
 				template,
 				obj,
-				"obj-filter: merge: Using Type Checking in template but object target object doesn't match.\nReturning template Type as result."
+				getExceptionMsg('mergeTypeChecking', 'merge')
 			);
 		}
 		return template;
@@ -134,7 +142,7 @@ function merge (template, obj, onException) {
 			return onException(
 				template,
 				obj,
-				"obj-filter: merge: Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.\nTreating as `true`"
+				getExceptionMsg('array', 'merge')
 			);
 		}
 		return obj;
@@ -160,7 +168,7 @@ function merge (template, obj, onException) {
 				return onException(
 					template,
 					obj,
-					"obj-filter: merge: template is object but target is not.\nReturning template as result."
+					getExceptionMsg('mergeTypeChecking', 'merge')
 				);
 			}
 			return template;
@@ -198,7 +206,7 @@ function exist (template, obj, onException) {
 			return onException(
 				template,
 				obj,
-				"obj-filter: exist: Using Type Checking in template but object target object doesn't match.\nReturning undefined."
+				getExceptionMsg('existTypeChecking')
 			);
 		}
 		
@@ -211,7 +219,7 @@ function exist (template, obj, onException) {
 			return onException(
 				template,
 				obj,
-				"obj-filter: exist: Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.\nTreating as `true`"
+				getExceptionMsg('array', 'exist')
 			);
 		}
 		return obj;
@@ -258,9 +266,9 @@ function ArrayIter (checker, template, {min = 0, onException} = {}) {
 
 	if (typeof(checker) !== "function") {
 		if (onException) {
-			return onException(undefined, undefined, "obj-filter: First argument of ArrayIter must be a function of obj-filter");
+			return onException(undefined, undefined, getExceptionMsg('arrayIterFirstArg'));
 		} else {
-			throw new Error("obj-filter: First argument of ArrayIter must be a function of obj-filter");
+			throw new Error(getExceptionMsg('arrayIterFirstArg'));
 		}
 	}
 	
