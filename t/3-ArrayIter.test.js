@@ -11,7 +11,7 @@ const template = {
 			merge,
 			{
 				"a121": filter.ArrayIter(filter, Number)
-			},
+			}
 		),
 		"b": ArrayIter(exist, Number),
 	}),
@@ -93,13 +93,13 @@ const exam_data  = {
 test("filter with ArrayIter and undefined filter should fail", function (t) {
 	let result = filter(
 		{"a2": ArrayIter(undefined, Number, {"onException": () => undefined})},
-		{"a2": [1, 2, 3]},
+		{"a2": [1, 2, 3]}
 	);
 	t.deepEqual(result, {}, "undefined filter with customer onException results empty result");
 
 	t.throws(() => filter(
 		{"a2": ArrayIter(undefined, Number)},
-		{"a2": [1, 2, 3]},
+		{"a2": [1, 2, 3]}
 	), Error, "undefined filter with default onException throws Error");
 
 	t.end();
