@@ -2,9 +2,9 @@
 "use strict";
 
 const EXCEPTION_MSGS = {
-	array: `Doesn"t support Array in template yet. The meaning might differ in different context. Please use custom function instead.\nTreating as ${true}`,
-	mergeTypeChecking: `Using Type Checking in template but object target object doesn"t match.\nReturning template Type as result.`,
-	existTypeChecking: `Using Type Checking in template but object target object doesn"t match.\nReturning undefined.`,
+	array: `Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.\nTreating as ${true}`,
+	mergeTypeChecking: `Using Type Checking in template but object target object doesn't match.\nReturning template Type as result.`,
+	existTypeChecking: `Using Type Checking in template but object target object doesn't match.\nReturning undefined.`,
 	arrayIterFirstArg: "First argument of ArrayIter must be a function of obj-filter",
 };
 
@@ -53,7 +53,7 @@ function _sameType (template, obj) {
 
 function filter (template, obj, onException) {
 
-	// exclude what"s undefined in template
+	// exclude what's undefined in template
 	if (typeof template === "undefined") {
 		return undefined;
 	}
@@ -113,7 +113,7 @@ function filter (template, obj, onException) {
 
 function merge (template, obj, onException) {
 
-	// exclude what"s undefined in template
+	// exclude what's undefined in template
 	if (typeof template === "undefined") {
 		return undefined;
 	}
@@ -188,7 +188,7 @@ function merge (template, obj, onException) {
 
 function exist (template, obj, onException) {
 
-	// exclude what"s undefined in template
+	// exclude what's undefined in template
 	if (typeof template === "undefined") {
 		return undefined;
 	}
