@@ -3,8 +3,8 @@
 
 const EXCEPTION_MSGS = {
 	array: `Doesn't support Array in template yet. The meaning might differ in different context. Please use custom function instead.\nTreating as ${true}`,
-	mergeTypeChecking: `Using Type Checking in template but object target object doesn't match.\nReturning template Type as result.`,
-	existTypeChecking: `Using Type Checking in template but object target object doesn't match.\nReturning undefined.`,
+	mergeTypeChecking: "Using Type Checking in template but object target object doesn't match.\nReturning template Type as result.",
+	existTypeChecking: "Using Type Checking in template but object target object doesn't match.\nReturning undefined.",
 	arrayIterFirstArg: "First argument of ArrayIter must be a function of obj-filter",
 };
 
