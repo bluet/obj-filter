@@ -1,5 +1,11 @@
 [![Build Status](https://travis-ci.org/BlueT/obj-filter.svg?branch=master)](https://travis-ci.org/BlueT/obj-filter) 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=obj-filter&metric=alert_status)](https://sonarcloud.io/dashboard?id=obj-filter)
+[![Open Source Helpers](https://www.codetriage.com/bluet/obj-filter/badges/users.svg)](https://www.codetriage.com/bluet/obj-filter)
+
+[![npm version](https://img.shields.io/npm/v/obj-filter.svg)](https://www.npmjs.org/package/obj-filter)
+[![install size](https://packagephobia.now.sh/badge?p=obj-filter)](https://packagephobia.now.sh/result?p=obj-filter)
+[![npm downloads](https://img.shields.io/npm/dm/obj-filter.svg)](http://npm-stat.com/charts.html?package=obj-filter)
+[![GitHub license](https://img.shields.io/github/license/BlueT/obj-filter.svg)](https://github.com/BlueT/obj-filter/blob/master/LICENSE)
 
 # obj-filter - JavaScript Object Filter / Merger.
 
