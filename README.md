@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/BlueT/obj-filter.svg?branch=master)](https://travis-ci.org/BlueT/obj-filter) 
+[![Build Status](https://travis-ci.org/BlueT/obj-filter.svg?branch=master)](https://travis-ci.org/BlueT/obj-filter) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbluet%2Fobj-filter.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbluet%2Fobj-filter?ref=badge_shield)
+
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=obj-filter&metric=alert_status)](https://sonarcloud.io/dashboard?id=obj-filter)
 [![Open Source Helpers](https://www.codetriage.com/bluet/obj-filter/badges/users.svg)](https://www.codetriage.com/bluet/obj-filter)  
 [![npm version](https://img.shields.io/npm/v/obj-filter.svg)](https://www.npmjs.org/package/obj-filter)
@@ -298,3 +299,7 @@ PRs welcome!
 If you use/like this module, please don't hesitate to give me a **Star**. I'll be happy whole day!
 
 _Hope this module can save your time, a tree, and a kitten._
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbluet%2Fobj-filter.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbluet%2Fobj-filter?ref=badge_large)
