@@ -33,7 +33,7 @@
   "homepage": "https://github.com/BlueT/obj-filter#readme",
   "devDependencies": {
     "app-root-path": "^2.0.1",
-    "nyc": "^14.1.0",
+    "nyc": "^15.0.1",
     "tap-spec": "^5.0.0",
     "tape": "^4.6.3"
   }
