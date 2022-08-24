@@ -42,4 +42,5 @@ sonar-project.properties
 .flowconfig
 .eslintrc.js
 *.tgz
-
+.github/
+t/
