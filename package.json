@@ -4,7 +4,7 @@
   "description": "JavaScript Object Filter. Deep filtering key/content recursively. Support type checking, wildcard, nested, and filter function in template.",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --check-coverage --reporter=lcov tape ./t/[0-9]*.test.js | tap-spec"
+    "test": "nyc --check-coverage --reporter=lcov tape ./t/[0-9]*.test.js"
   },
   "repository": {
     "type": "git",
@@ -34,7 +34,6 @@
   "devDependencies": {
     "app-root-path": "^2.0.1",
     "nyc": "^14.1.0",
-    "tap-spec": "^5.0.0",
     "tape": "^4.6.3"
   }
 }
