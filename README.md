@@ -1,4 +1,7 @@
-[![Build Status](https://travis-ci.org/BlueT/obj-filter.svg?branch=master)](https://travis-ci.org/BlueT/obj-filter) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbluet%2Fobj-filter.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbluet%2Fobj-filter?ref=badge_shield)
+[![Build](https://github.com/bluet/obj-filter/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/bluet/obj-filter/actions/workflows/sonarcloud.yml)
+[![CodeQL](https://github.com/bluet/obj-filter/actions/workflows/codeql.yml/badge.svg)](https://github.com/bluet/obj-filter/actions/workflows/codeql.yml)
+[![Node CI](https://github.com/bluet/obj-filter/actions/workflows/nodejs.yml/badge.svg)](https://github.com/bluet/obj-filter/actions/workflows/nodejs.yml)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbluet%2Fobj-filter.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbluet%2Fobj-filter?ref=badge_shield)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=obj-filter&metric=alert_status)](https://sonarcloud.io/dashboard?id=obj-filter)
 [![Open Source Helpers](https://www.codetriage.com/bluet/obj-filter/badges/users.svg)](https://www.codetriage.com/bluet/obj-filter)  
